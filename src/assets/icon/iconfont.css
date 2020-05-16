@@ -1,0 +1,30 @@
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1589646668427'); /* IE9 */
+  src: url('iconfont.eot?t=1589646668427#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAM4AAsAAAAABvwAAALpAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCCcAqCCIF2ATYCJAMICwYABCAFhG0HLRsZBsiOk6UGkr/z+XTqP53iqucwKIhQkAkUlRAnABybrQA4duwzxeTutwRzDhjziXun/zfOu0DmO+9ynHNhgHEgBboHRpEVSAAeccPYBS7hPhAADKGSkKqapi4I4GEtIwCISa+dAiEXBA+eZQQQqGr28iCb4QSBW8M9BrAp/Dz5jYwEgIMThVXTdtXTUfb+dg5d7FiMIZ+AaD47AHYIoACSADxAumqTLSgIY1KwJI8I2FclAb75Oxy+GWSvPx6ICla5MwAgGArvSeSKb5WfAwDwwGSgE2AadTZA41VR8571+LJjSyJ2+h59VvPoSReeoH/dxS7dCuYO3M62rrsaezN1l9/gLnJs9jp1L8fm9Xnvjtq+nZno8+e9ZMnd2BPXA3wOYPET/92no9U+J0747PEv2fIzrryVbj51afoRSj+3Fbd9bOslVWpaN1XXwFYRlftb8pFMuE/Ab1lMdn9i18IEZ49CUI6big/a7PunuuZHLWUnLwoe+DHkN3MjHXUOdfmw2WLgZ8aEqSvOdtrLPqWlnT70KABlAMCxlqd05o/+Dm5d2Z876lb0T1DzAIBX33KaQnE/NyDcjosAv7VrADj+85RLLBPHq0ogBodOye0qmO6BA5bX07uxWp93yBII8HkT9ySEpKAQEEXy9CQ4QY0sqCCgFAyJag+r4UVGQfjJABKsACBwdxYcXHEXFO4mSJ7+Fk7w9RcquEfB0JPXmWrEpGeVsjRFkaaLU+eI+mlWi8axKCyq7JC0M0xT5KwkZPVI8rg+IqanpBUztZJFkufYMD5Tm6EoGlEjW81iDXhMMpmsok22GqRpSopOUWwFqamauhelTLOawVBJJplCIZlONNUcIr1prCw0/mgFK72/g0RrBpMp5JaBmmAPiWycfnpRuhRpPchapaXXwL08M24mrQwKhYZIQ2ZlJqoBsyQmJlYiW/0sA8k0ihS6EXGbAqn2ME1fZcr6avPXHQNgsHQcsRso6NwpFgAAAAA=') format('woff2'),
+  url('iconfont.woff?t=1589646668427') format('woff'),
+  url('iconfont.ttf?t=1589646668427') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('iconfont.svg?t=1589646668427#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="el-icon-support"], 
+[class*=" el-icon-support"]/*这里有空格*/{ 
+	font-family: "iconfont" !important;
+	font-size: 16px;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale; 
+}
+
+.el-icon-supportzan:before {
+  content: "\e618";
+}
+

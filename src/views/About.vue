@@ -6,7 +6,7 @@
           <page-side/>
         </el-aside>
         <el-main>
-          <el-header></el-header>
+          <router-view></router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -31,7 +31,7 @@ export default {
   left: 0;
   height: 10%!important;
   position: absolute;
-  
+
   background-color: #545c64;
 
 }
@@ -41,15 +41,15 @@ export default {
   top: 0;
   width: 80%;
   height: 100%;
-  background-color: #b3c0d1;
+  /*background-color: #b3c0d1;*/
   color: #333;
 }
 .el-aside {
   display: block;
   position: absolute;
-  width: 19%!important;
+  width: 19% !important;
   right: 0;
-  top: 0px;
+  top: 0;
   bottom: 0;
   background-color: #545c64;
   overflow-y: scroll;
