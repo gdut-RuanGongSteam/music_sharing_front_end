@@ -8,7 +8,7 @@ Vue.use(VueRouter);
   {
     path: '/',
     name: 'Home',
-    redirect: '/about'
+    redirect: '/about/find'
   },
   {
     path: '/about',
@@ -36,6 +36,11 @@ Vue.use(VueRouter);
         ]
       },
       {
+        path:"find",
+        name:"find",
+        component: () => import('../views/find')
+      },
+      {
         path: "download",
         name: 'download',
         component: () => import('../views/Download')
@@ -44,7 +49,12 @@ Vue.use(VueRouter);
         path: "share",
         name: 'share',
         component: () => import('../views/Share')
-      }
+      },
+      {
+        path: '/search',
+        name: 'search',
+        component: () => import('../views/search')
+      },
     ]
   },
   {

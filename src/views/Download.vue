@@ -62,9 +62,9 @@
 				}],
 			}
 		},
-		mounted() {
-			this.download();
-		},
+		// mounted() {
+		// 	this.download();
+		// },
 		methods: {
 			download () {
 				let that = this;

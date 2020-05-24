@@ -12,11 +12,11 @@
                     active-text-color="#ffd04b"
                     router>
                     <div>
-                        <el-avatar src="https://s1.ax1x.com/2020/05/06/YVUz7V.jpg" shape="circle" :size="120"></el-avatar>
+                        <el-avatar src="https://s1.ax1x.com/2020/05/06/YVUz7V.jpg" shape="circle" :size="150"></el-avatar>
                         <p style="color:white;">123456</p>
                     </div>
                     <hr/>
-                    <el-menu-item index="1">
+                    <el-menu-item index="/about/find">
                         <i class="el-icon-menu"></i>
                         <span slot="title">发现</span>
                     </el-menu-item>
@@ -44,6 +44,9 @@
 
 <script>
   export default {
+    mounted(){
+        console.log(this.$route.path)
+    },
     methods: {
       handleOpen(key, keyPath) {
         console.log(key, keyPath);

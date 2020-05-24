@@ -34,7 +34,7 @@ export default {
   position: absolute;
   margin: 0 auto;
   height: 100%;
-  width: 81%;
+  width: 83%;
   background-color: #b3c0d1;
   color: #333;
   overflow: auto;
@@ -44,14 +44,13 @@ export default {
   /* position: relative; */
   /* overflow-y: scroll; */
   position: absolute;
-  width: 19%!important;
+  width: 17%!important;
   right: 0;
   top: 0;
   bottom: 0;
   background-color: #545c64;
   overflow-y: scroll;
-  padding-top: 5%;
-  /* width: 20%; */
+  padding-top: 3%;
 }
 .el-card{
     margin: 50px 50px 30px 50px;

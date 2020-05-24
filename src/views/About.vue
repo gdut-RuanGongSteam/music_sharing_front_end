@@ -6,35 +6,18 @@
           <page-side/>
         </el-aside>
         <el-main>
-          <div>
-              <el-input></el-input>
-          </div>
-          <el-tabs type="border-card">
-            <el-tab-pane label="最新">
-              <div style=" height:490px;background-color:white;">
-                <current/>
-              </div>
-            </el-tab-pane>
-            <el-tab-pane label="下载排行">
-              <div style=" height:490px;background-color:white;">
-                <current/>
-              </div>
-            </el-tab-pane>
-            <el-tab-pane label="热门歌手">角色管理</el-tab-pane>
-            <el-tab-pane label="标签">定时任务补偿</el-tab-pane>
-            
-          </el-tabs>
-          <el-button @click="changePage()">test</el-button>
-          <!-- <router-view></router-view> -->
+          <router-view></router-view>
         </el-main>
-        <el-footer style="height:30px;backgrand-color:red;"></el-footer>
+        <el-footer>
+          <pageFoot/>
+        </el-footer>
       </el-container>
     </el-container>
   </div>
 </template>
 <script>
 import pageSide from'../components/page_side'
-import current from'@/components/current'
+import pageFoot from '@/components/page_foot'
 
 export default {
   methods:{
@@ -44,7 +27,7 @@ export default {
   },
   components:{
     pageSide,
-    current
+    pageFoot
   }
 }
 </script>
@@ -58,7 +41,6 @@ export default {
   left: 0;
   height: 10%!important;
   position: absolute;
-
   background-color: #545c64;
 
 }
@@ -66,7 +48,7 @@ export default {
   position: absolute;
   left: 0;
   top: 0;
-  width: 80%;
+  width: 81%;
   height: 100%;
   /*background-color: #b3c0d1;*/
   color: #333;
@@ -74,12 +56,19 @@ export default {
 .el-aside {
   display: block;
   position: absolute;
-  width: 19% !important;
+  width: 17% !important;
   right: 0;
   top: 0;
   bottom: 0;
   background-color: #545c64;
   overflow-y: scroll;
-  padding-top: 5%;
+  padding-top: 3%;
+}
+.el-footer{
+  position: absolute;
+  width: 100%;
+  height: 5%;
+  background-color: black;
+  bottom: 0;
 }
 </style>
