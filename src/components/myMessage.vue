@@ -1,19 +1,42 @@
 <template>
     <el-card class="collection-card">
         <div slot="header" class="clearfix">
-            <span>我的消息</span>
-            <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+            <span class="title">我的消息</span>
         </div>
         <div v-for="o in 4" :key="o" class="text item">
-            {{'列表内容 ' + o }}
+            <Comment></Comment>
         </div>
     </el-card>
 </template>
-<style  scoped>
+
+<script>
+    import Comment from './comment'
+
+    export default {
+        name: 'myMessage',
+        components: {
+            Comment
+        },
+        data () {
+            return {
+
+            }
+        }
+    }
+</script>
+
+<style scoped>
 .collection-card{
     min-width: 700px;
 }
 .clearfix{
     text-align: left;
+}
+.title {
+    font-size: 17px;
+    font-weight: 600;
+}
+/deep/ .el-card__body {
+    padding-top: 0;
 }
 </style>

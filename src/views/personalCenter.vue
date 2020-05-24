@@ -2,11 +2,10 @@
     <div>
         <el-container>
             <el-main>
-                <my-collection></my-collection>
-                <my-sharing></my-sharing>
-                <my-message></my-message>
+                <mySharing></mySharing>
+                <myMessage></myMessage>
             </el-main>
-            <el-aside >
+            <el-aside>
                 <page-side/>
             </el-aside>
         </el-container>
@@ -15,28 +14,27 @@
 
 <script>
 import pageSide from'../components/page_side'
-import myCollection from '../components/myCollection'
 import mySharing from '../components/mySharing'
 import myMessage from '../components/myMessage'
 
 export default {
     components:{
         pageSide,
-        myCollection,
-        myMessage,
-        mySharing
+        mySharing,
+        myMessage
     }
 }
 </script>
 <style scoped>
-el-container{
-     height: 100%;
+
+.el-container{
+    height: 100%;
 }
 .el-main{
   position: absolute;
   margin: 0 auto;
   height: 100%;
-  width: 83%;
+  width: 81%;
   background-color: #b3c0d1;
   color: #333;
   overflow: auto;
@@ -45,11 +43,10 @@ el-container{
   display: block;
   /* position: relative; */
   /* overflow-y: scroll; */
-  display: block;
   position: absolute;
-  width: 17%!important;
+  width: 19%!important;
   right: 0;
-  top: 0px;
+  top: 0;
   bottom: 0;
   background-color: #545c64;
   overflow-y: scroll;
@@ -57,9 +54,9 @@ el-container{
   /* width: 20%; */
 }
 .el-card{
-    margin: 50px 50px 100px 50px;
+    margin: 50px 50px 30px 50px;
 }
-::-webkit-scrollbar{
+.el-main::-webkit-scrollbar{
 	display: none;
 }
 </style>
