@@ -8,9 +8,9 @@
         <el-main>
           <router-view></router-view>
         </el-main>
-        <el-footer>
+        <!-- <el-footer>
           <pageFoot/>
-        </el-footer>
+        </el-footer> -->
       </el-container>
     </el-container>
   </div>
@@ -70,5 +70,6 @@ export default {
   height: 5%;
   background-color: black;
   bottom: 0;
+  padding: 0;
 }
 </style>

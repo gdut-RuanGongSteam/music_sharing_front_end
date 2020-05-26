@@ -18,7 +18,11 @@
                 <dowmloadRank/>
               </div>
             </el-tab-pane>
-            <el-tab-pane label="热门歌手">角色管理</el-tab-pane>
+            <el-tab-pane label="热门歌手">
+              <div style=" height:520px;background-color:white;">
+                <singer/>
+              </div>
+            </el-tab-pane>
             <el-tab-pane label="标签">定时任务补偿</el-tab-pane>
             
           </el-tabs>
@@ -26,6 +30,7 @@
 </template>
 <script>
 import current from'@/components/current'
+import singer from'@/components/singer'
 import dowmloadRank from'@/components/dowmloadRanking'
 import {mapMutations,mapGetters} from 'vuex'
 import { request } from '../api/http'
@@ -60,7 +65,8 @@ export default {
     },
     components:{
         current,
-        dowmloadRank
+        dowmloadRank,
+        singer
     }
 }
 </script>

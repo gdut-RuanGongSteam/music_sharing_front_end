@@ -8,7 +8,8 @@ export default new Vuex.Store({
     currentMusic:[],
     downloadRank:[],
     seachList:[],
-    searchInput:""
+    searchInput:"",
+    singer:[]
   },
   mutations: {
     setCurrentMusicData(state,musicData){
@@ -19,13 +20,21 @@ export default new Vuex.Store({
     },
     setSearchList(state,searchData){
       state.seachList=searchData
+    },
+    setSingerList(state,singers){
+      state.singer=singers
+      const baseUrl="http://120.24.35.66:8080/files/pictures/"
+      for(let i=0;i<state.singer.list.length;i++){
+        state.singer.list[i].picturePath=baseUrl+state.singer.list[i].picturePath
+      }
     }
   },
   getters:{
     currentMusicDate:(state)=>{return state.currentMusic},
     downloadRankData:(state)=>{return state.downloadRank},
     searchResult:(state)=>{return state.seachList},
-    searchInputing:(state)=>{return state.searchInput}
+    searchInputing:(state)=>{return state.searchInput},
+    singerList:(state)=>{return state.singer}
   },
   actions: {
   },
