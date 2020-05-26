@@ -1,10 +1,37 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import personalCenter from '../views/personalCenter.vue'
+import homepage from '../views/homepage.vue'
+import logining from '../views/Login.vue'
+import registering from '../views/Register.vue'
 
 Vue.use(VueRouter);
 
   const routes = [
+  {
+      path:'/homepage',
+      name:'homepage',
+      component: homepage,
+      meta:{
+        isLogin:false
+      }
+    },
+    {
+      path:'/login',
+      name:'login',
+      component:logining,
+      meta:{
+        isLogin:false
+      }
+    },
+    {
+      path:'/register',
+      name:'registering',
+      component:registering,
+      meta:{
+        isLogin:false
+      }
+    },
   {
     path: '/',
     name: 'Home',

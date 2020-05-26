@@ -39,7 +39,7 @@ export default {
   color: #333;
   overflow: auto;
 }
-.el-aside {
+.el-aside{
   display: block;
   /* position: relative; */
   /* overflow-y: scroll; */
