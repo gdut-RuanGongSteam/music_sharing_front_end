@@ -35,15 +35,14 @@
                 prop="name"
                 label="操作"
                 width="160">
-                <template slot-scope="scope">
-                    <operate-pane @play="createPlay(scope.$index)"></operate-pane>
+                <template >
+                    <operate-pane></operate-pane>
                 </template>
             </el-table-column>
         </el-table>
         <el-pagination
             class="pageControl"
             background
-            @current-change="handleCurrentChange"
             layout="prev, pager, next"
             :total="pages">
         </el-pagination>
@@ -56,68 +55,38 @@ import { request } from '../api/http'
 export default {
     data() {
         return {
-            tableData:[],
-            isPlay:false,
-            vedio:Object
+            tableData:[]
         }
     },
     mounted(){
         this.getSongs()
     },
     methods:{
-        createPlay(index){
-            if(this.isPlay){
-                document.body.removeChild(this.vedio)
-                this.isPlay=false
-            }
-            this.vedio=document.createElement("audio")
-            let baseSrc="http://120.24.35.66:8080/files/songs/"
-            this.vedio.src=baseSrc+this.currentList[index].path
-            // this.vedio.control
-            console.log(this.vedio.src,index,this.currentList[index].path)
-            document.body.appendChild(this.vedio)
-            this.vedio.play()
-            this.isPlay=true
-            // document.body.removeChild(vedio)
-        },
         getSongs(){
             const content={
                 pageNum:1,
                 pageSize:15,
-                sortByDownloadNum:false
+                sortByDownloadNum:true
             }
             request("/song/songList",content,"get").then((e)=>{
-                console.log(e)
-                this.setCurrentData(e)
-                this.tableData=this.currentList
+                console.log(e,this.sort)
+                this.setownloadRank(e)
+                this.tableData=this.downloadRankList
             })
-        },
-        handleCurrentChange(val) {
-            const content={
-                pageNum:`${val}`,
-                pageSize:15,
-                sortByDownloadNum:false
-            }
-            request("/song/songList",content,"get").then((e)=>{
-                console.log(e)
-                this.setCurrentData(e)
-                this.tableData=this.currentList
-            })
-            console.log(`当前页: ${val}`);
         },
         ...mapMutations({
-            setCurrentData:"setCurrentMusicData"
+            setownloadRank:"setownloadRankData"
         })
     },
     computed: {
-        currentList(){
-            return this.currentMusicDate.list
+        downloadRankList(){
+            return this.downloadRankData.list
         },
         pages(){
-            return this.currentMusicDate.pages*10
+            return this.downloadRankData.pages*10
         },
         ...mapGetters([
-            "currentMusicDate"
+            "downloadRankData"
         ])
     },
     components:{
@@ -127,6 +96,6 @@ export default {
 </script>
 <style scoped>
 .pageControl{
-    padding: 40px 0px 70px 0px;
+    padding: 40px 0px 40px 0px;
 }
 </style>

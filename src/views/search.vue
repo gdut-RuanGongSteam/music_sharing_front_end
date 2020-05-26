@@ -72,52 +72,44 @@ export default {
             }
             this.vedio=document.createElement("audio")
             let baseSrc="http://120.24.35.66:8080/files/songs/"
-            this.vedio.src=baseSrc+this.currentList[index].path
+            this.vedio.src=baseSrc+this.searchList[index].path
             // this.vedio.control
-            console.log(this.vedio.src,index,this.currentList[index].path)
+            console.log(this.vedio.src,index,this.searchList[index].path)
             document.body.appendChild(this.vedio)
             this.vedio.play()
             this.isPlay=true
             // document.body.removeChild(vedio)
         },
         getSongs(){
-            const content={
-                pageNum:1,
-                pageSize:15,
-                sortByDownloadNum:false
-            }
-            request("/song/songList",content,"get").then((e)=>{
-                console.log(e)
-                this.setCurrentData(e)
-                this.tableData=this.currentList
-            })
+            this.tableData=this.searchList
         },
         handleCurrentChange(val) {
             const content={
                 pageNum:`${val}`,
                 pageSize:15,
-                sortByDownloadNum:false
+                name:this.userInput.inputData
             }
-            request("/song/songList",content,"get").then((e)=>{
+            request("song/findSongByNameOrAuthor",content,"post").then((e)=>{
                 console.log(e)
-                this.setCurrentData(e)
-                this.tableData=this.currentList
+                this.setSearch(e)
+                this.tableData=this.searchList
             })
             console.log(`当前页: ${val}`);
         },
         ...mapMutations({
-            setCurrentData:"setCurrentMusicData"
+            setSearch:"setSearchList"
         })
     },
     computed: {
-        currentList(){
-            return this.currentMusicDate.list
+        searchList(){
+            return this.searchResult.list
         },
         pages(){
-            return this.currentMusicDate.pages*10
+            return this.searchResult.pages*10
         },
         ...mapGetters([
-            "currentMusicDate"
+            "searchResult",
+            "searchInputing"
         ])
     },
     components:{
