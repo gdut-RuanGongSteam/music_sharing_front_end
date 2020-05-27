@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-container>
-            <el-main>   
+            <el-main>
                 <img class="theimg" src="../assets/login3.png">
                 <img class="secimg" src="../assets/login2.png">
                 <img class="firimg" src="../assets/login1.png">
@@ -27,11 +27,11 @@
 </template>
 
 <script>
-    import logining from '@/components/login.vue' 
+    import logining from '@/components/login.vue'
     export default {
     components: {
         logining,
-        
+
     },
 }
 </script>
@@ -56,7 +56,7 @@
 .el-main img{
   position: absolute;
 }
-    
+
 .el-aside{
    /*display: block;*/
   /* position: relative; */

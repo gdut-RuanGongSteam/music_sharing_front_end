@@ -26,14 +26,14 @@
 </template>
 
 <script>
-    export default {      
+    export default {
     data(){
         return {
             user_name:'',
             postbox:'',
             pwd:'',
             pwd1:'',
-            yzm:'',          
+            yzm:'',
         }
     },
     methods:{
@@ -46,7 +46,7 @@
           }
         });
       },
-      
+
     },
 }
 </script>
@@ -55,7 +55,7 @@
 .register{
     position:absolute;
     width:80%;
-    left:10%;    
+    left:10%;
 }
 .input_style{
     width:100px ;

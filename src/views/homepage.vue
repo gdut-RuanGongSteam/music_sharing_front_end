@@ -3,7 +3,7 @@
         <home></home>                                  
         <a href="/login" class="box2" style="font-size:12px;color:white;text-decoration: none">登录</a>
         <a href="register" class="box1" style="font-size:12px;color:white;text-decoration: none">注册</a>
-           
+
     </div>
 </template>
 
