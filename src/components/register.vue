@@ -13,15 +13,15 @@
             <el-input class="input_style" placeholder="请再次确定密码" v-model="pwd1" show-password ></el-input>
         </div>
         <el-row >
-            <el-col :span="14">
+            <el-col :span="12">
                 <div><el-input class="input_style" placeholder="请输入验证码" v-model="yzm" clearable ></el-input></div>
             </el-col>
             <img src="../assets/yanzhengma.png" style="float :right; margin-left:15px">
         </el-row>
-
-        <a href="/login"><span style=" float:left;color: #A9A9AB;font-size:12px;margin-top:20px">&lt;返回上一步</span></a>
-        <el-button type="view" @click="register" round style="width:45%;">起飞</el-button>
-
+        <div style="margin-top:10px">
+            <a href="/login"><span style=" float:left;color: #A9A9AB;font-size:12px;margin-top:20px">&lt;返回上一步</span></a>
+            <el-button type="view" @click="register" round style="width:45%;">起飞</el-button>
+        </div>
     </div>
 </template>
 
@@ -51,12 +51,18 @@
 }
 </script>
 
-<style>
+<style >
 .register{
     position:absolute;
     width:80%;
     left:10%;    
 }
+.input_style{
+    width:100px ;
+    margin-bottom: 10px;
+    position:absolute;
+    
+  }
 /*.el-row {
     margin-bottom: 20px;
 }

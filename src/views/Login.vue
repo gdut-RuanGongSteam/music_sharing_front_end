@@ -1,5 +1,5 @@
 <template>
-    <div class="homepage">
+    <div>
         <el-container>
             <el-main>   
                 <img class="theimg" src="../assets/login3.png">
@@ -7,10 +7,19 @@
                 <img class="firimg" src="../assets/login1.png">
             </el-main>
             <el-aside >
-                <logining></logining>
-            
-                <a href="javascript:;" class="box2" style="font-size:12px;color:white;text-decoration: none">登录</a>
-                <a href="/register" class="box1" style="font-size:12px;color:white;text-decoration: none">注册</a>
+                <el-header>
+                    <a href="javascript:;" class="box2" style="font-size:12px;color:white;text-decoration: none">登录</a>
+                    <a href="/register" class="box1" style="font-size:12px;color:white;text-decoration: none">注册</a>
+                </el-header>
+                 <logining></logining>
+                <el-footer>
+                     <div class="help" >
+                        <span>记住我<input class="tick" name="" type="checkbox" value="" checked="checked"></span>
+                        <a href="http://localhost:8080/">
+                            <span style="float: right;color: #A9A9AB;font-size:13px;" cursor:pointer>忘记密码？</span>
+                        </a>
+                    </div>
+                </el-footer>
             </el-aside >    
         
         </el-container>
@@ -27,17 +36,16 @@
 }
 </script>
 
-<style>
+<style scoped>
 .theimg{top:10%; left:50%;width:500px;position:absolute}
 .secimg{top:10%; left:15%;width:500px;position:absolute}
 .firimg{top:30%; left:35%;width:500px;position:absolute}
 
 .el-container{
-     height: 100%;
-     position:relative;
+     height: 100%;   
 }
 .el-main{
-    /* background-color: #018383;*/
+     background-color: #018383;
     position:absolute;
     width: 75%!important;
     top: 0;
@@ -64,11 +72,34 @@
   padding-top: 5%;
   /* width: 20%; */
 }
-/*.el-card{
-    margin: 50px 50px 100px 50px;
-}*/
+.el-header{
+    position:absolute;
+    top:0;
+    width:100%;
+    /*background-color:red;*/
+}
 
 ::-webkit-scrollbar{/*取消滚动条*/
 	display: none;
 }
+
+.help{
+    position:absolute;
+    left:0;
+    margin-top: 250px;
+    width:100%;
+    /*background-color:red;*/
+  }
+.help span{
+    float:left;
+    color: #A9A9AB;
+    font-size:13px;
+    padding:20px;
+    /*background-color:green;*/
+}
+.tick{
+    position:absolute;
+    float:left;
+    width:13px;
+  }
 </style>

@@ -9,14 +9,7 @@
             <span v-if="error.pwd" class="err-msg">{{error.pwd}}</span>
         </div>
         <el-button type="view" @click="login" round style="font-size:12px;">起飞</el-button>
-        <div class="help" >
-            <span style="float:left; color: #A9A9AB; font-size:12px;">记住我</span>
-            <input class="tick" name="" type="checkbox" value="" checked="checked"> 
-            <a href="http://localhost:8080/">
-              <span style="float: right;color: #A9A9AB;font-size:12px;" cursor:pointer>忘记密码？</span>
-            </a>
-        </div>
-        
+              
       </div>  
     
 </template>
@@ -65,16 +58,7 @@
     position:absolute;
     
   }
-  .help{
-    position:absolute;
-    margin-top: 20px;
-    width:100%;
-  }
-  .tick{
-    position:absolute;
-    left:35px;
-    width:15px;
-  }
+  
 
  /* .login_style{
     width: 20%;
