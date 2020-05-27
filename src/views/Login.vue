@@ -1,33 +1,33 @@
 <template>
     <div class="homepage">
         <el-container>
-            <el-main>   
+            <el-main>
                 <img class="theimg" src="../assets/login3.png">
                 <img class="secimg" src="../assets/login2.png">
                 <img class="firimg" src="../assets/login1.png">
             </el-main>
             <el-aside >
                 <logining></logining>
-            
+
                 <a href="javascript:;" class="box2" style="font-size:12px;color:white;text-decoration: none">登录</a>
                 <a href="/register" class="box1" style="font-size:12px;color:white;text-decoration: none">注册</a>
-            </el-aside >    
-        
+            </el-aside >
+
         </el-container>
     </div>
 </template>
 
 <script>
-    import logining from '@/components/login.vue' 
+    import logining from '@/components/login.vue'
     export default {
     components: {
         logining,
-        
+
     },
 }
 </script>
 
-<style>
+<style scoped>
 .theimg{top:10%; left:50%;width:500px;position:absolute}
 .secimg{top:10%; left:15%;width:500px;position:absolute}
 .firimg{top:30%; left:35%;width:500px;position:absolute}
@@ -48,7 +48,7 @@
 .el-main img{
   position: absolute;
 }
-    
+
 .el-aside{
    /*display: block;*/
   /* position: relative; */

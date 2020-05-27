@@ -26,14 +26,14 @@
 </template>
 
 <script>
-    export default {      
+    export default {
     data(){
         return {
             user_name:'',
             postbox:'',
             pwd:'',
             pwd1:'',
-            yzm:'',          
+            yzm:'',
         }
     },
     methods:{
@@ -46,16 +46,16 @@
           }
         });
       },
-      
+
     },
 }
 </script>
 
-<style>
+<style scoped>
 .register{
     position:absolute;
     width:80%;
-    left:10%;    
+    left:10%;
 }
 /*.el-row {
     margin-bottom: 20px;

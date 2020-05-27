@@ -24,7 +24,7 @@
               </div>
             </el-tab-pane>
             <el-tab-pane label="标签">定时任务补偿</el-tab-pane>
-            
+
           </el-tabs>
     </div>
 </template>
@@ -32,7 +32,7 @@
 import current from'@/components/current'
 import singer from'@/components/singer'
 import dowmloadRank from'@/components/dowmloadRanking'
-import {mapMutations,mapGetters} from 'vuex'
+import {mapMutations, mapGetters} from 'vuex'
 import { request } from '../api/http'
 
 export default {
@@ -79,7 +79,7 @@ export default {
   padding-bottom: 15px;
 }
 .el-tabs__item{
-  padding: 0px 30px;
+  padding: 0 30px;
   height: 45px;
 }
 .el-tabs__nav-scroll {
