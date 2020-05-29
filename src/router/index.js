@@ -35,7 +35,7 @@ Vue.use(VueRouter);
   {
     path: '/',
     name: 'Home',
-    redirect: '/about/find'
+    redirect: '/homepage'
   },
   {
     path: '/about',

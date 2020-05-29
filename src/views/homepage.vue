@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style> 
+<style scoped> 
     
     .box2{
         position:absolute;

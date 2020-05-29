@@ -2,9 +2,9 @@
     <div>
         <el-container>
             <el-main>   
-                <img class="theimg" src="../assets/zhuce3.png">
-                <img class="secimg" src="../assets/zhuce2.png">
-                <img class="firimg" src="../assets/zhuce1.png">
+                <img class="theimg" src="../assets/image/zhuce3.png">
+                <img class="secimg" src="../assets/image/zhuce2.png">
+                <img class="firimg" src="../assets/image/zhuce1.png">
             </el-main>
             <el-aside >
                 <el-header>
@@ -79,5 +79,15 @@
 
 ::-webkit-scrollbar{/*取消滚动条*/
 	display: none;
+}
+.box2{
+        position:absolute;
+        right:80px;
+        top:0;
+}
+.box1{
+        position:absolute;
+        right:40px;
+        top:0;
 }
 </style>
