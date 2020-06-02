@@ -64,9 +64,6 @@
                 content.append('name', this.uploadData['name']);
                 content.append('author', this.uploadData['author']);
                 content.append('file', this.uploadData['file']);
-                for (let [a, b] of content.entries()) {
-                    console.log(a, b);
-                }
                 // let content = {
                 //     ...this.uploadData,
                 //     userId : "1"
@@ -74,7 +71,11 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         upload(content).then((res)=>{
-                            console.log(res)
+                            if (res) {
+                                this.$message.success('提交成功');
+                            } else {
+                                this.$message.error('提交失败');
+                            }
                         }).catch((e)=>{
                             console.log("error", e);
                         })
