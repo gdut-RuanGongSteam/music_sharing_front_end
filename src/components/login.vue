@@ -23,32 +23,14 @@
 <script>
   export default {
     data(){
-
-      // var validateName = (rule, value, callback) => {
-      //   if (value === '') {
-      //     callback(new Error('请输入用户名'));
-      //   } 
-      //   setTimeout(() => {
-      //     if (this.ruleForm.name !== '我服了') {
-      //       callback(new Error('名字不正确!'));
-      //     }
-      //     callback();
-      //   }, 1000);
-      // };
-
-
-      //  var validatePass = (rule, value, callback) => {
-      //   if (value === '') {
-      //     callback(new Error('请输入密码'));
-      //   } 
-      //   setTimeout(() => {
-      //     if (this.ruleForm.pass !== '123456') {
-      //       callback(new Error('密码不正确!'));
-      //     }
-      //     callback();
-      //   }, 1000);
-      // },
-
+      const checkEmail = (rule,value,callback)=>{
+            //邮箱正则表达式
+            const postbox =/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
+            if(postbox.test(value)){
+                return callback();
+            }
+            callback(new Error("请输入合法邮箱"))
+      }
 
       return {
         loginform : {
@@ -59,7 +41,7 @@
         loginformrules:{
           postmax:[
             { required:true, message:"请输入邮箱", trigger: 'blur'},
-            {min:10,max:15, message:"长度在10到15位之间", trigger: 'blur'}
+            {validator:checkEmail,  trigger: 'blur'}
           ],
           pwd:[
             {required:true, message:"请输入密码", trigger: 'blur'},
@@ -72,23 +54,23 @@
       resetform(){
         // console.log(this);
         this.$refs.loginformRef.resetFields();
-      },
-
-        
+      },       
       login(){
-        this.$refs.loginformRef.validate((valid)=>{
-          if(valid){
-            // const result = this.$http.post("login",this.loginform);
-            //console.log(result);
-            alert('登陆成功');
-            //自定义跳转 ->首页
-            let indexHref = '/about/find';
-            window.location.href = indexHref;
-            
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
+        this.$refs.loginformRef.validate(async valid=>{ //async
+          if(!valid) return; 
+          // else {
+          //   alert('登陆成功');
+          //   // 自定义跳转 ->首页
+          //   let indexHref = '/about/find';
+          //   window.location.href = indexHref;
+          // }
+          const {data:result} =await this.$http.post("user/login",this.loginform);
+          console.log(result);
+          if(!result.flag) return this.$message.error("登录失败");
+          this.$message.error("登陆成功");
+          
+          window.sessionStorage.setItem("token",result.data.token);//保存token
+          this.$rounter.push("/about/find");
         });   
       },
       
