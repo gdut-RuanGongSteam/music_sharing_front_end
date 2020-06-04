@@ -34,9 +34,9 @@
             <el-table-column
                 prop="name"
                 label="操作"
-                width="160">
+                width="180">
                 <template slot-scope="scope">
-                    <operate-pane @play="createPlay(scope.$index)"></operate-pane>
+                    <operate-pane  :rowIndex=scope.$index :content=currentList ></operate-pane>
                 </template>
             </el-table-column>
         </el-table>
@@ -65,21 +65,6 @@ export default {
         this.getSongs()
     },
     methods:{
-        createPlay(index){
-            if(this.isPlay){
-                document.body.removeChild(this.vedio)
-                this.isPlay=false
-            }
-            this.vedio=document.createElement("audio")
-            let baseSrc="http://120.24.35.66:8080/files/songs/"
-            this.vedio.src=baseSrc+this.currentList[index].path
-            // this.vedio.control
-            console.log(this.vedio.src,index,this.currentList[index].path)
-            document.body.appendChild(this.vedio)
-            this.vedio.play()
-            this.isPlay=true
-            // document.body.removeChild(vedio)
-        },
         getSongs(){
             const content={
                 pageNum:1,

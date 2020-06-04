@@ -27,7 +27,7 @@
 }
 </script>
 
-<style>
+<style scoped>
 .theimg{top:10%; left:50%;width:500px;position:absolute}
 .secimg{top:10%; left:15%;width:500px;position:absolute}
 .firimg{top:30%; left:35%;width:500px;position:absolute}

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-container>
+        <!-- <el-container>
             <el-main>
                 <mySharing></mySharing>
                 <myMessage></myMessage>
@@ -8,7 +8,9 @@
             <el-aside>
                 <page-side/>
             </el-aside>
-        </el-container>
+        </el-container> -->
+        <mySharing></mySharing>
+        <myMessage></myMessage>
     </div>
 </template>
 

@@ -1,5 +1,13 @@
 <template>
     <div>
+        <div class="search">
+            <el-form label-width="3%" :model="userInput" status-icon ref="userInput" @submit.native.prevent>
+			 	<el-form-item label=""  prop="inputData">
+			 		<el-input type="inputData" v-model="userInput.inputData" placeholder="歌曲/歌手" prefix-icon="el-icon-search" style="width: 40%;" @keyup.enter.native="search()"></el-input>
+			 	</el-form-item>
+			</el-form>
+        </div>
+        <el-card>
         <el-table
             ref="multipleTable"
             :data="tableData"
@@ -34,9 +42,9 @@
             <el-table-column
                 prop="name"
                 label="操作"
-                width="160">
+                width="180">
                 <template slot-scope="scope">
-                    <operate-pane @play="createPlay(scope.$index)"></operate-pane>
+                    <operate-pane  :rowIndex=scope.$index :content=searchList ></operate-pane>
                 </template>
             </el-table-column>
         </el-table>
@@ -47,6 +55,7 @@
             layout="prev, pager, next"
             :total="pages">
         </el-pagination>
+        </el-card>
     </div>
 </template>
 <script>
@@ -56,48 +65,47 @@ import { request } from '../api/http'
 export default {
     data() {
         return {
+            userInput:{
+					inputData:''
+				},
             tableData:[],
             isPlay:false,
             vedio:Object
         }
     },
     mounted(){
-        this.getSongs()
+        this.tableData=this.searchList
     },
     methods:{
-        createPlay(index){
-            if(this.isPlay){
-                document.body.removeChild(this.vedio)
-                this.isPlay=false
-            }
-            this.vedio=document.createElement("audio")
-            let baseSrc="http://120.24.35.66:8080/files/songs/"
-            this.vedio.src=baseSrc+this.searchList[index].path
-            // this.vedio.control
-            console.log(this.vedio.src,index,this.searchList[index].path)
-            document.body.appendChild(this.vedio)
-            this.vedio.play()
-            this.isPlay=true
-            // document.body.removeChild(vedio)
-        },
-        getSongs(){
-            this.tableData=this.searchList
-        },
         handleCurrentChange(val) {
             const content={
                 pageNum:`${val}`,
                 pageSize:15,
-                name:this.userInput.inputData
+                name:this.getsearchInput
             }
-            request("song/findSongByNameOrAuthor",content,"post").then((e)=>{
+            console.log(this.getsearchInput)
+            request("song/findSongByNameOrAuthor",content,"get").then((e)=>{
                 console.log(e)
                 this.setSearch(e)
                 this.tableData=this.searchList
             })
             console.log(`当前页: ${val}`);
         },
+        search(){
+            this.setInputData(this.userInput.inputData)
+            const content={
+                pageNum:1,
+                pageSize:15,
+                name:this.getsearchInput
+            }
+            request("song/findSongByNameOrAuthor",content,"get").then((e)=>{
+                console.log(e,this.userInput.inputData)
+                this.setSearch(e)
+            })
+        },
         ...mapMutations({
-            setSearch:"setSearchList"
+            setSearch:"setSearchList",
+            setInputData:"setSearchInput"
         })
     },
     computed: {
@@ -109,8 +117,15 @@ export default {
         },
         ...mapGetters([
             "searchResult",
-            "searchInputing"
+            "getsearchInput"
         ])
+    },
+    watch:{
+        searchList:{
+            handler(val){
+                this.tableData=val
+            }
+        }
     },
     components:{
         operatePane

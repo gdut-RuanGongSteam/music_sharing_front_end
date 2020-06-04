@@ -9,7 +9,12 @@ export default new Vuex.Store({
     downloadRank:[],
     seachList:[],
     searchInput:"",
-    singer:[]
+    singer:[],
+    playList:[],
+    currentPlayIndex:{
+      name:"",
+      isPlay:false
+    }
   },
   mutations: {
     setCurrentMusicData(state,musicData){
@@ -27,14 +32,26 @@ export default new Vuex.Store({
       for(let i=0;i<state.singer.list.length;i++){
         state.singer.list[i].picturePath=baseUrl+state.singer.list[i].picturePath
       }
+    },
+    setSearchInput(state,inputData){
+      state.searchInput=inputData
+    },
+    setPlayList(state,music){
+      state.playList.push(music)
+    },
+    setCurrentPlayIndex(state,content){
+      state.currentPlayIndex.name=content.name
+      state.currentPlayIndex.isPlay=content.isPlay
     }
   },
   getters:{
     currentMusicDate:(state)=>{return state.currentMusic},
     downloadRankData:(state)=>{return state.downloadRank},
     searchResult:(state)=>{return state.seachList},
-    searchInputing:(state)=>{return state.searchInput},
-    singerList:(state)=>{return state.singer}
+    getsearchInput:(state)=>{return state.searchInput},
+    singerList:(state)=>{return state.singer},
+    getPlayList(state){return state.playList},
+    getCurrentPlayIndex(state){return state.currentPlayIndex}
   },
   actions: {
   },

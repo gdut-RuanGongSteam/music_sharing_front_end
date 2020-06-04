@@ -1,8 +1,8 @@
 <template>
     <div class="singer">
-        <div class="demo-image" v-for="(singer,index) in singersList" :key="index">
+        <div class="demo-image" v-for="(singer,index) in singersList" :key="index" @click="getSong(singer.name)">
             <el-image
-            style="width: 125px; height: 125px"
+            style="width: 150px; height: 150px"
             :src=singer.picturePath
             fit="fill"></el-image>
             <p class="title">{{singer.name}}</p>
@@ -33,8 +33,22 @@ export default {
                 console.log(e)
             })
         },
+        getSong(name){
+        const content={
+          pageNum:1,
+          pageSize:15,
+          name:name
+        }
+        this.setInputData(name)
+        request("song/findSongByNameOrAuthor",content,"get").then((e)=>{
+          this.setSearch(e)
+          this.$router.push("/search")
+        })
+      },
         ...mapMutations({
-            setSingers:"setSingerList"
+            setSingers:"setSingerList",
+            setSearch:"setSearchList",
+            setInputData:"setSearchInput"
         })
     },
     computed:{
@@ -51,6 +65,8 @@ export default {
 .singer{
     float: left;
     display: flex;
+    flex-direction:row;
+    flex-wrap:wrap;
 }
 .demo-image{
     margin: 20px;

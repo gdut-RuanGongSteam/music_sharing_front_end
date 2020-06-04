@@ -82,12 +82,12 @@ Vue.use(VueRouter);
         name: 'search',
         component: () => import('../views/search')
       },
+      {
+        path: '/personalCenter',
+        name: 'personalCenter',
+        component: personalCenter
+      },
     ]
-  },
-  {
-    path: '/personalCenter',
-    name: 'personalCenter',
-    component: personalCenter
   },
 ];
 

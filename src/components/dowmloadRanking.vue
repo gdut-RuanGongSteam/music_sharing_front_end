@@ -34,15 +34,16 @@
             <el-table-column
                 prop="name"
                 label="操作"
-                width="160">
-                <template >
-                    <operate-pane></operate-pane>
+                width="180">
+                <template slot-scope="scope">
+                    <operate-pane  :rowIndex=scope.$index :content=downloadRankList ></operate-pane>
                 </template>
             </el-table-column>
         </el-table>
         <el-pagination
             class="pageControl"
             background
+            @current-change="handleCurrentChange"
             layout="prev, pager, next"
             :total="pages">
         </el-pagination>
@@ -74,6 +75,19 @@ export default {
                 this.tableData=this.downloadRankList
             })
         },
+        handleCurrentChange(val) {
+            const content={
+                pageNum:`${val}`,
+                pageSize:15,
+                sortByDownloadNum:true
+            }
+            request("/song/songList",content,"get").then((e)=>{
+                console.log(e)
+                this.setownloadRank(e)
+                this.tableData=this.downloadRankList
+            })
+            console.log(`当前页: ${val}`);
+        },
         ...mapMutations({
             setownloadRank:"setownloadRankData"
         })
@@ -96,6 +110,6 @@ export default {
 </script>
 <style scoped>
 .pageControl{
-    padding: 40px 0px 40px 0px;
+    padding: 40px 0px 70px 0px;
 }
 </style>

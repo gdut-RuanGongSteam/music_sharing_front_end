@@ -51,7 +51,7 @@
 }
 </script>
 
-<style>
+<style scoped>
   .login{
     position:absolute;
     width:80%;

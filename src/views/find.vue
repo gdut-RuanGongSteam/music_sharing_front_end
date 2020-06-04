@@ -23,7 +23,7 @@
                 <singer/>
               </div>
             </el-tab-pane>
-            <el-tab-pane label="标签">定时任务补偿</el-tab-pane>
+            <!-- <el-tab-pane label="标签">定时任务补偿</el-tab-pane> -->
             
           </el-tabs>
     </div>
@@ -45,10 +45,11 @@ export default {
     },
     methods:{
       search(){
+        this.setInputData(this.userInput.inputData)
         const content={
           pageNum:1,
           pageSize:15,
-          name:this.userInput.inputData
+          name:this.getsearchInput
         }
         request("song/findSongByNameOrAuthor",content,"get").then((e)=>{
           console.log(e,this.userInput.inputData)
@@ -57,11 +58,14 @@ export default {
         })
       },
       ...mapMutations({
-        setSearch:"setSearchList"
+        setSearch:"setSearchList",
+        setInputData:"setSearchInput"
       })
     },
     computed:{
-
+        ...mapGetters([
+          "getsearchInput"
+        ])
     },
     components:{
         current,

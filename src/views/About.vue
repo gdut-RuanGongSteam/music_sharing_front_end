@@ -8,26 +8,32 @@
         <el-main>
           <router-view></router-view>
         </el-main>
-        <!-- <el-footer>
-          <pageFoot/>
-        </el-footer> -->
+        <el-footer>
+          <player/>
+        </el-footer>
+        
       </el-container>
     </el-container>
   </div>
 </template>
 <script>
 import pageSide from'../components/page_side'
-import pageFoot from '@/components/page_foot'
+import player from '@/components/player'
 
 export default {
+  data () { 
+  return { 
+    
+  } 
+ },
   methods:{
     changePage(){
       this.$router.replace("personalCenter")
-    }
+    }, 
   },
   components:{
     pageSide,
-    pageFoot
+    player
   }
 }
 </script>
@@ -67,9 +73,9 @@ export default {
 .el-footer{
   position: absolute;
   width: 100%;
-  height: 5%;
-  background-color: black;
-  bottom: 0;
+  /* height: 5%; */
+  /* background-color: black; */
+  bottom: 3%;
   padding: 0;
 }
 </style>
