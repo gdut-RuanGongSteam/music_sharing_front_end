@@ -7,35 +7,26 @@ import registering from '../views/Register.vue'
 
 Vue.use(VueRouter);
 
-  const routes = [
+  const routes =[
   {
       path:'/homepage',
       name:'homepage',
       component: homepage,
-      meta:{
-        isLogin:false
-      }
     },
     {
       path:'/login',
       name:'login',
       component:logining,
-      meta:{
-        isLogin:false
-      }
     },
     {
       path:'/register',
       name:'registering',
       component:registering,
-      meta:{
-        isLogin:false
-      }
     },
   {
     path: '/',
     name: 'Home',
-    redirect: '/about/find'
+    redirect: '/homepage'
   },
   {
     path: '/about',
@@ -96,5 +87,14 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
+
+//路由导航收守卫???
+// routes.beforeEach((to,from,next)=>{
+//   if(to.path==='/login') return next();
+//   //获取token
+//   const tokenStr=window.sessionStorage.getItem('token');
+//   if(!tokenStr) return next('/login');
+//   next()
+// })
 
 export default router

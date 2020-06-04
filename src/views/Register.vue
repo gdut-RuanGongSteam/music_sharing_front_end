@@ -1,19 +1,8 @@
 <template>
-    <div class="homepage">
-        <el-container>
-            <el-main>   
-                <img class="theimg" src="../assets/zhuce3.png">
-                <img class="secimg" src="../assets/zhuce2.png">
-                <img class="firimg" src="../assets/zhuce1.png">
-            </el-main>
-            <el-aside >
-                <registering></registering>
-            
-                <a href="/login" class="box2" style="font-size:12px;color:white;text-decoration: none">登录</a>
-                <a href="/register" class="box1" style="font-size:12px;color:white;text-decoration: none">注册</a>
-            </el-aside >    
-        
-        </el-container>
+    <div class="login_container">
+        <div class="login_box">
+        <registering/>
+        </div>
     </div>
 </template>
 
@@ -22,11 +11,29 @@
     export default {
     components: {
         registering,
-        
     },
 }
 </script>
 
-<style>
+<style scoped>
+.login_container{
+    background:url(../assets/image/register.jpg) no-repeat;
+    background-size:cover;
+    width: 100%;
+    height: 100%;
+    opacity: 0.9;/*设置透明度*/
+    position: fixed;
+}
+.login_box{
+    width:35%;
+    height:70%;
+    background-color:#fff;
+    border-radius:10px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    background:rgba(255,255,255,0.3);
+}
 
 </style>
