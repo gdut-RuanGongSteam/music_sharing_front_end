@@ -1,91 +1,97 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import personalCenter from '../views/personalCenter.vue'
-import homepage from '../views/homepage.vue'
-import logining from '../views/Login.vue'
-import registering from '../views/Register.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import personalCenter from "../views/personalCenter.vue";
+import homepage from "../views/homepage.vue";
+import logining from "../views/Login.vue";
+import registering from "../views/Register.vue";
 
 Vue.use(VueRouter);
 
-  const routes =[
+const routes = [
   {
-      path:'/homepage',
-      name:'homepage',
-      component: homepage,
-    },
-    {
-      path:'/login',
-      name:'login',
-      component:logining,
-    },
-    {
-      path:'/register',
-      name:'registering',
-      component:registering,
-    },
-  {
-    path: '/',
-    name: 'Home',
-    redirect: '/homepage'
+    path: "/homepage",
+    name: "homepage",
+    component: homepage,
   },
   {
-    path: '/about',
-    name: 'About',
+    path: "/login",
+    name: "login",
+    component: logining,
+  },
+  {
+    path: "/register",
+    name: "registering",
+    component: registering,
+  },
+  {
+    path: "/",
+    name: "Home",
+    redirect: "/homepage",
+  },
+  {
+    path: "/about",
+    name: "About",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/About.vue"),
     children: [
       {
+        path: "comment-page",
+        name: "comment-page",
+        component: () => import("../views/Comment-Page"),
+      },
+      {
         path: "setting",
-        name: 'setting',
-        component: () => import('../views/Setting'),
+        name: "setting",
+        component: () => import("../views/Setting"),
         children: [
           {
-            path: 'profile',
-            name: 'profile',
-            component: () => import('../components/Setting/user-info')
+            path: "profile",
+            name: "profile",
+            component: () => import("../components/Setting/user-info"),
           },
           {
             path: "password",
             name: "password",
-            component: () => import('../components/Setting/modify-password')
-          }
-        ]
+            component: () => import("../components/Setting/modify-password"),
+          },
+        ],
       },
       {
-        path:"find",
-        name:"find",
-        component: () => import('../views/find')
+        path: "find",
+        name: "find",
+        component: () => import("../views/find"),
       },
       {
         path: "download",
-        name: 'download',
-        component: () => import('../views/Download')
+        name: "download",
+        component: () => import("../views/Download"),
       },
       {
         path: "share",
-        name: 'share',
-        component: () => import('../views/Share')
+        name: "share",
+        component: () => import("../views/Share"),
       },
       {
-        path: '/search',
-        name: 'search',
-        component: () => import('../views/search')
+        path: "/search",
+        name: "search",
+        component: () => import("../views/search"),
       },
       {
-        path: '/personalCenter',
-        name: 'personalCenter',
-        component: personalCenter
+        path: "/personalCenter",
+        name: "personalCenter",
+        component: personalCenter,
       },
-    ]
+    ],
   },
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 //路由导航收守卫???
@@ -97,4 +103,4 @@ const router = new VueRouter({
 //   next()
 // })
 
-export default router
+export default router;
