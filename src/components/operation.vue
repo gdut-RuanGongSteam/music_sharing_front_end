@@ -3,7 +3,7 @@
       <el-button  size="mini" class="el-icon-caret-right" circle @click="playing()"></el-button>
       <el-button  size="mini" class="el-icon-download" circle></el-button>
       <el-button  size="mini" class="el-icon-plus" @click="addSong()" circle></el-button>
-      <el-button  size="mini" class="el-icon-chat-dot-round" circle></el-button>
+      <el-button  size="mini" class="el-icon-chat-dot-round" @click="turnToComment()" circle></el-button>
     </div>
 </template>
 <script>
@@ -75,6 +75,9 @@ export default {
         lrc: this.content[this.rowIndex].lyric,
       }
       this.setPlaying(music)
+    },
+    turnToComment() {
+      this.$router.push({name: 'comment-page'});
     },
     ...mapMutations({
       setPlaying:"setPlayList",

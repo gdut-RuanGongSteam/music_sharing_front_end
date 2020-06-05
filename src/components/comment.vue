@@ -59,7 +59,7 @@
 
 		.comment-container {
 			display: flex;
-			align-items: start;
+			align-items: flex-start;
 			flex-direction: column;
 			font-size: 13px;
 			width: 100%;
