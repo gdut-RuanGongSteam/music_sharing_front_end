@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<!-- <el-card> -->
 		<p class="title">下载中心</p>
 		<hr/>
 		<el-table
@@ -7,12 +8,13 @@
 				:data="tableData"
 				tooltip-effect="dark"
 				style="width: 100%">
-			<el-table-column
+			<!-- <el-table-column
 					type="selection"
 					width="55">
-			</el-table-column>
+			</el-table-column> -->
 			<el-table-column
 					prop="song"
+					width="290"
 					label="歌名">
 			</el-table-column>
 			<el-table-column
@@ -38,59 +40,70 @@
 				</template>
 			</el-table-column>
 		</el-table>
+		<!-- </el-card> -->
 	</div>
 </template>
 
 <script>
 	import Vue from 'vue'
 	import axios from 'axios'
+	import {mapMutations,mapGetters,mapActions} from 'vuex'
 
 	export default {
 		name: "download",
 		data () {
 			return {
-				tableData: [{
-					song: "屋顶",
-					singer: "周杰伦",
-					userName: "郑靓",
-					progress: 0,
-				}, {
-					song: "十年",
-					singer: "陈奕迅",
-					userName: "郑靓",
-					progress: 100,
-				}],
+				tableData:[]
 			}
 		},
-		// mounted() {
-		// 	this.download();
-		// },
+		mounted() {
+			this.tableData=this.getDownloadlist
+		},
 		methods: {
-			download () {
-				let that = this;
-				axios.get(`http://120.24.35.66:8080/music_system/song/downloaderOneSong/d55d87cc-31eb-42c8-98ab-208c31e89ff8.mp3`, {
-					responseType: 'blob',
-					headers: {
-						'Content-Type': 'audio/mpeg;charset=utf-8',
-					},
-					onDownloadProgress (progressEvent) {
-						Vue.set(that.tableData[0], "progress", Math.round(progressEvent.loaded / progressEvent.total * 100));
-					}
-				}).then((res)=>{
-					console.log(res);
-					if (!res) {
-						return
-					}
-					let url = window.URL.createObjectURL(new Blob([res.data], {type: "audio/mpeg"}));
-					let link = document.createElement('a');
-					link.style.display = 'none';
-					link.href = url;
-					link.setAttribute('download', "");
-					document.body.appendChild(link);
-					link.click();
-					document.body.removeChild(link);
-				})
+			// download (url,fileName) {
+			// 	let that = this;
+			// 	axios.get(url, {
+			// 		responseType: 'blob',
+			// 		headers: {
+			// 			'Content-Type': 'audio/mpeg;charset=utf-8',
+			// 		},
+			// 		onDownloadProgress (progressEvent) {
+			// 			Vue.set(that.tableData[0], "progress", Math.round(progressEvent.loaded / progressEvent.total * 100));
+			// 		}
+			// 	}).then((res)=>{
+			// 		console.log(res);
+			// 		if (!res) {
+			// 			return
+			// 		}
+			// 		let url = window.URL.createObjectURL(new Blob([res.data], {type: "audio/mpeg"}));
+			// 		let link = document.createElement('a');
+			// 		link.style.display = 'none';
+			// 		link.href = url;
+			// 		link.setAttribute('download', fileName);
+			// 		document.body.appendChild(link);
+			// 		link.click();
+			// 		document.body.removeChild(link);
+			// 	})
+			// },
+			...mapMutations({
+				setDownload:"setDownloadList",
+			}),
+		},
+		computed:{
+			...mapGetters([
+				"getDownloadlist",
+			]),
+			Downloadlist(){
+				return this.getDownloadlist
 			},
+		},
+		watch:{
+			Downloadlist:{
+				handler(val){
+					this.tableData=val
+				},
+				deep:true
+			}
 		}
 	}
 </script>

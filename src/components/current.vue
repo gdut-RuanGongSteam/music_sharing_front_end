@@ -27,7 +27,7 @@
                 width="190">
             </el-table-column>
             <el-table-column
-                prop="address"
+                prop="sharerName"
                 label="分享者"
                 width="190">
             </el-table-column>

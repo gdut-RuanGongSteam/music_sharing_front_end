@@ -12,8 +12,8 @@
                     active-text-color="#ffd04b"
                     router>
                     <div>
-                        <el-avatar src="https://s1.ax1x.com/2020/05/06/YVUz7V.jpg" shape="circle" :size="150"></el-avatar>
-                        <p style="color:white;">123456</p>
+                        <el-avatar :src="imgUrl" shape="circle" :size="150"></el-avatar>
+                        <p style="color:white;">{{userName}}</p>
                     </div>
                     <hr/>
                     <el-menu-item index="/about/find">
@@ -43,7 +43,13 @@
 </template>
 
 <script>
+import{getters, mapGetters} from 'vuex'
   export default {
+    data() {
+        return {
+            
+        }
+    },
     mounted(){
         console.log(this.$route.path)
     },
@@ -55,6 +61,21 @@
       handleClose(key, keyPath) {
         console.log(key, keyPath);
       }
+    },
+    computed:{
+        ...mapGetters([
+            "getUser"
+        ]),
+        imgUrl(){
+            if(this.getUser.head_picture){
+                return this.getUser.head_picture
+            }else{
+                return "https://s1.ax1x.com/2020/05/06/YVUz7V.jpg"
+            }
+        },
+        userName(){
+            return this.getUser.name
+        }
     }
   };
 </script>

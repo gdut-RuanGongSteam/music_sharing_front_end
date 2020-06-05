@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <el-container>
-      <el-container>
+      <el-container style="scrollbar-width:none;">
         <el-aside >
           <page-side/>
         </el-aside>
@@ -19,6 +19,8 @@
 <script>
 import pageSide from'../components/page_side'
 import player from '@/components/player'
+import {mapMutations} from 'vuex'
+import{ request } from '@/api/http'
 
 export default {
   data () { 
@@ -26,10 +28,19 @@ export default {
     
   } 
  },
+  mounted(){
+    request("user/getLoginUser","","get").then((e)=>{
+      console.log("about:",e)
+      this.setUser(e)
+    })
+  },
   methods:{
     changePage(){
       this.$router.replace("personalCenter")
     }, 
+    ...mapMutations({
+      setUser:"setUserData"
+    })
   },
   components:{
     pageSide,
@@ -54,7 +65,7 @@ export default {
   position: absolute;
   left: 0;
   top: 0;
-  width: 81%;
+  width: 82%;
   height: 100%;
   /*background-color: #b3c0d1;*/
   color: #333;

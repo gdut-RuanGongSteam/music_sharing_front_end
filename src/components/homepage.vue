@@ -23,7 +23,9 @@ export default {
         height:100%;
         width:100%;
         top:0;
-        background-color: #018383;
+        background-image:url(https://wallpaper.infinitynewtab.com/wallpaper/3411.jpg);
+        background-repeat:no-repeat;
+        background-size:100%;
         
     }
   .home{

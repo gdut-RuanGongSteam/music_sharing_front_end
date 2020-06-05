@@ -3,8 +3,8 @@
         <a href="javascript:;" class="box2" style="font-size:15px;color:white;text-decoration: none">登录</a>
         <a href="/register" class="box1" style="font-size:15px;color:white;text-decoration: none">注册</a>
     <el-form ref="loginformRef" :model="loginform" :rules="loginformrules" label-width="70px" class="login_form">
-
-      <el-form-item label="邮箱:" prop="postmax">
+<!-- :rules="loginformrules" -->
+      <el-form-item class="item" label="邮箱:" prop="postmax">
         <el-input v-model="loginform.postmax" prefix-icon="el-icon-user-solid" placeholder="请输入邮箱" clearable></el-input>
       </el-form-item>
       <el-form-item label="密码:" prop="pwd">
@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import { request } from '../api/http';
+import {mapMutations} from 'vuex'
   export default {
     data(){
       const checkEmail = (rule,value,callback)=>{
@@ -58,27 +60,43 @@
       login(){
         this.$refs.loginformRef.validate(async valid=>{ //async
           if(!valid) return; 
-          // else {
-          //   alert('登陆成功');
-          //   // 自定义跳转 ->首页
-          //   let indexHref = '/about/find';
-          //   window.location.href = indexHref;
-          // }
-          const {data:result} =await this.$http.post("user/login",this.loginform);
+          let loginFormData=new FormData();
+          loginFormData.append("mailbox",this.loginform.postmax);
+          loginFormData.append("password",this.loginform.pwd);
+          console.log(loginFormData)
+          const {data:result} =await this.$http.post("user/login",loginFormData);
           console.log(result);
-          if(!result.flag) return this.$message.error("登录失败");
-          this.$message.error("登陆成功");
+          if(!result.flag) return this.$message.error(result.msg[0]);
+          // this.$message.error("登陆成功");
           
-          window.sessionStorage.setItem("token",result.data.token);//保存token
-          this.$rounter.push("/about/find");
+          // window.sessionStorage.setItem("token",result.data.token);//保存token
+          request("user/getLoginUser","","get").then((e)=>{
+            console.log(e)
+            if(!e.enabled){
+              return this.$message.error("账号尚未激活，请前往邮箱激活你的账号!");
+            }
+            this.setUser(e)
+            this.$router.push("/about/find");
+            this.$message({
+              message:"登陆成功！欢迎您，"+e.name,
+              type:"success"
+            })
+          })
+          // this.$router.push("/about/find");
         });   
       },
-      
+      ...mapMutations({
+        setUser:"setUserData"
+      })
     }
            
 }
 </script>
-
+<style>
+.login_form .el-form-item__label {
+  color: white;
+}
+</style>
 <style scoped>
 .btns{
   display:flex;/*弹性盒子*/

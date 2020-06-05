@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+axios.defaults.withCredentials=true
 
 const baseUrl = "http://120.24.35.66:8080/music_system/"
 

@@ -61,6 +61,9 @@ export default {
     },
     mounted(){
         this.getSongs()
+        // request("user/getLoginUser","","get").then((e)=>{
+        //     console.log("find；",e)
+        // })
     },
     methods:{
         getSongs(){
@@ -71,7 +74,7 @@ export default {
             }
             request("/song/songList",content,"get").then((e)=>{
                 console.log(e,this.sort)
-                this.setownloadRank(e)
+                this.setdownloadRank(e)
                 this.tableData=this.downloadRankList
             })
         },
@@ -83,13 +86,13 @@ export default {
             }
             request("/song/songList",content,"get").then((e)=>{
                 console.log(e)
-                this.setownloadRank(e)
+                this.setdownloadRank(e)
                 this.tableData=this.downloadRankList
             })
             console.log(`当前页: ${val}`);
         },
         ...mapMutations({
-            setownloadRank:"setownloadRankData"
+            setdownloadRank:"setdownloadRankData"
         })
     },
     computed: {
