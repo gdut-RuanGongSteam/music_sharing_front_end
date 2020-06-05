@@ -42,15 +42,7 @@
 <script>
 import { request } from '../api/http';
 import {mapMutations} from 'vuex'
-  export default {
-    data(){
-      const checkEmail = (rule,value,callback)=>{
-            //邮箱正则表达式
-            const postbox =/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
-            if(postbox.test(value)){
-                return callback();
-            }
-            callback(new Error("请输入合法邮箱"))
+
 export default {
   data() {
     const checkEmail = (rule, value, callback) => {
@@ -80,48 +72,42 @@ export default {
       }
     };
   },
-  methods: {
-    resetform() {
+  methods:{
+    resetform(){
       // console.log(this);
       this.$refs.loginformRef.resetFields();
-    },
-    methods:{
-      resetform(){
-        // console.log(this);
-        this.$refs.loginformRef.resetFields();
-      },       
-      login(){
-        this.$refs.loginformRef.validate(async valid=>{ //async
-          if(!valid) return; 
-          let loginFormData=new FormData();
-          loginFormData.append("mailbox",this.loginform.postmax);
-          loginFormData.append("password",this.loginform.pwd);
-          console.log(loginFormData)
-          const {data:result} =await this.$http.post("user/login",loginFormData);
-          console.log(result);
-          if(!result.flag) return this.$message.error(result.msg[0]);
-          // this.$message.error("登陆成功");
+    },       
+    login(){
+      this.$refs.loginformRef.validate(async valid=>{ //async
+        if(!valid) return; 
+        let loginFormData=new FormData();
+        loginFormData.append("mailbox",this.loginform.postmax);
+        loginFormData.append("password",this.loginform.pwd);
+        console.log(loginFormData)
+        const {data:result} =await this.$http.post("user/login",loginFormData);
+        console.log(result);
+        if(!result.flag) return this.$message.error(result.msg[0]);
+        // this.$message.error("登陆成功");
           
-          // window.sessionStorage.setItem("token",result.data.token);//保存token
-          request("user/getLoginUser","","get").then((e)=>{
-            console.log(e)
-            if(!e.enabled){
-              return this.$message.error("账号尚未激活，请前往邮箱激活你的账号!");
-            }
-            this.setUser(e)
-            this.$router.push("/about/find");
-            this.$message({
-              message:"登陆成功！欢迎您，"+e.name,
-              type:"success"
-            })
+        // window.sessionStorage.setItem("token",result.data.token);//保存token
+        request("user/getLoginUser","","get").then((e)=>{
+          console.log(e)
+          if(!e.enabled){
+            return this.$message.error("账号尚未激活，请前往邮箱激活你的账号!");
+          }
+          this.setUser(e)
+          this.$router.push("/about/find");
+          this.$message({
+            message:"登陆成功！欢迎您，"+e.name,
+            type:"success"
           })
-          // this.$router.push("/about/find");
-        });   
-      },
-      ...mapMutations({
-        setUser:"setUserData"
-      })
-    }
+        })
+        // this.$router.push("/about/find");
+      });   
+    },
+    ...mapMutations({
+      setUser:"setUserData"
+    })
   }
 };
 </script>
