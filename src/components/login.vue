@@ -88,8 +88,6 @@ export default {
         console.log(result);
         if (!result.flag) return this.$message.error("登录失败");
         this.$message.success("登陆成功");
-
-        window.sessionStorage.setItem("token", result.data.token); //保存token
         this.$rounter.push("/about/find");
       });
     }
