@@ -32,7 +32,7 @@
       </el-form-item>
       <el-form-item>
         <div class="btn-container">
-          <el-button type="primary" @click="submitData('uploadData')">提交上传</el-button>
+          <el-button type="primary" :loading="loading" @click="submitData('uploadData')">提交上传</el-button>
         </div>
       </el-form-item>
     </el-form>
@@ -47,6 +47,7 @@ export default {
   name: "my-sharing",
   data() {
     return {
+      loading: false,
       uploadData: {
         name: "",
         author: "",
@@ -83,6 +84,7 @@ export default {
     },
     submitData(formName) {
       this.$refs[formName].validate(valid => {
+        this.loading = true;
         if (valid) {
           let content = new FormData();
           content.append("userId", this.user.id);
@@ -92,6 +94,7 @@ export default {
           console.log('this.uploadData["file"]: ', this.uploadData["file"]);
           upload(content)
             .then(res => {
+              this.loading = false;
               if (res) {
                 this.$message.success("提交成功");
                 this.initUpload();
