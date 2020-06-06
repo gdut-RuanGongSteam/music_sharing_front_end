@@ -72,7 +72,7 @@
 </template>
 
 <script>
-import { request } from '../../api/http'
+import { request } from "../../api/http";
 
 export default {
   data() {
@@ -175,13 +175,17 @@ export default {
       this.updating = true;
       this.$refs[name].validate(valid => {
         if (valid) {
-            let content = {
-                password: this.password.curpwd,
-                newPassword: this.newPassword
-            };
-            request("user/updatePassword", content, "post").then((res)=>{
-                console.log(res)
-            })
+          let content = new FormData();
+          content.append('password', this.password.curpwd);
+          content.append('newPassword', this.password.newpwd);
+          this.edit();
+          request("user/updatePassword", content, "post").then(res => {
+            if (res) {
+              this.successMessage('修改成功');
+            } else {
+              this.errorMessage('修改失败');
+            }
+          });
         }
         this.updating = false;
       });
@@ -212,8 +216,8 @@ export default {
 };
 </script>
 
-<style scoped>
-/deep/ .el-form-item__content {
+<style lang="less" scoped>
+/deep/.el-form-item__content {
   display: flex;
 }
 
@@ -238,7 +242,7 @@ export default {
   padding-right: 0;
 }
 
-/deep/ .el-form-item__error {
+/deep/.el-form-item__error {
   display: flex;
   position: static;
   margin-left: 6px;
