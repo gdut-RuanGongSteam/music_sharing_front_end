@@ -34,7 +34,7 @@
 
 <script>
     import upload from '../api/upload'
-
+    import {getters, mapGetters} from 'vuex'
     export default {
         name: 'my-sharing',
         data () {
@@ -59,8 +59,11 @@
                 return false   //屏蔽了action的默认上传
             },
             submitData (formName) {
+                if(!this.uploadData){
+                    return this.$message.error('上传列表为空，请上传文件！');
+                }
                 let content = new FormData();
-                content.append('userId', "1")
+                content.append('userId', this.getUser.name)
                 content.append('name', this.uploadData['name']);
                 content.append('author', this.uploadData['author']);
                 content.append('file', this.uploadData['file']);
@@ -76,12 +79,18 @@
                             } else {
                                 this.$message.error('提交失败');
                             }
+                            this.uploadData=null
                         }).catch((e)=>{
                             console.log("error", e);
                         })
                     }
                 })
             }
+        },
+        computed:{
+            ...mapGetters([
+                "getUser"
+            ])
         }
     }
 </script>

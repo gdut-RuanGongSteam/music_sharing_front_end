@@ -174,6 +174,7 @@ export default {
                     request("user/registered",content,"get").then((e)=>{
                         console.log(e)
                         if(e.flag){
+                            this.$router.push("/login")
                             this.$message({
                                 message: e.msg[0],
                                 type: 'success'

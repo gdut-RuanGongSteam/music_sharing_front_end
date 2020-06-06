@@ -5,18 +5,18 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    currentMusic:[],
-    downloadRank:[],
-    seachList:[],
-    searchInput:"",
-    singer:[],
-    playList:[],
-    currentPlayIndex:{
+    currentMusic:[],//最新歌曲
+    downloadRank:[],//下载热度
+    seachList:[],//搜索歌曲列表
+    searchInput:"",//搜索输入的字符
+    singer:[],//歌手
+    playList:[],//播放列表
+    currentPlayIndex:{//当前播放歌曲名和状态
       name:"",
       isPlay:false
     },
-    downloadList:[],
-    user:{}
+    downloadList:[],//下载列表
+    user:{}//用户基本信息
   },
   mutations: {
     setCurrentMusicData(state,musicData){
