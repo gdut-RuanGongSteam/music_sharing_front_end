@@ -1,4 +1,5 @@
 <template>
+<div>
     <div class="singer">
         <div class="demo-image" v-for="(singer,index) in singersList" :key="index" @click="getSong(singer.name)">
             <el-image
@@ -7,6 +8,15 @@
             fit="fill"></el-image>
             <p class="title">{{singer.name}}</p>
         </div>
+        
+    </div>
+    <el-pagination
+        class="pageControl"
+        background
+        @current-change="handleCurrentChange"
+        layout="prev, pager, next"
+        :total="pages">
+    </el-pagination>
     </div>
 </template>
 <script>
@@ -45,6 +55,16 @@ export default {
           this.$router.push("/search")
         })
       },
+      handleCurrentChange(val) {
+            const content={
+                pageNum:`${val}`,
+                pageSize:20
+            }
+            request("singer/singerList",content,"get").then((e)=>{
+                this.setSingers(e)
+                console.log(e)
+            })
+        },
         ...mapMutations({
             setSingers:"setSingerList",
             setSearch:"setSearchList",
@@ -54,6 +74,9 @@ export default {
     computed:{
         singersList(){
             return this.singerList.list
+        },
+        pages(){
+            return this.singerList.pages*10
         },
         ...mapGetters([
             "singerList"
@@ -71,5 +94,11 @@ export default {
 .demo-image{
     margin: 20px;
     cursor: pointer;
+}
+.pageControl{
+    position: absolute;
+    bottom: -10%;
+    left: 42%;
+    padding: 40px 0px 70px 0px;
 }
 </style>

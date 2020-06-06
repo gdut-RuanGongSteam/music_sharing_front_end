@@ -16,6 +16,7 @@
       <el-form-item label="文件" prop="file">
         <el-upload
           drag
+          ref="upload"
           action="#"
           accept=".mp3"
           :auto-upload="false"
@@ -80,12 +81,10 @@ export default {
         callback();
       } else {
         callback(new Error("必须上传歌曲"));
+        this.loading = false;
       }
     },
     submitData(formName) {
-        if(!this.uploadData){
-            return this.$message.error("上传列表为空，请先选择文件！")
-        }
       this.$refs[formName].validate(valid => {
         this.loading = true;
         if (valid) {
@@ -97,17 +96,23 @@ export default {
           console.log('this.uploadData["file"]: ', this.uploadData["file"]);
           upload(content)
             .then(res => {
+                console.log("上传：",res)
               this.loading = false;
-              if (res) {
-                this.$message.success("提交成功");
-                this.initUpload();
-              } else {
-                this.$message.error("提交失败");
+              if (res.data.includes("上传成功")) {
+                this.$message.success("上传成功");
+              } else if (res.data.includes("上传失败")) {
+                this.$message.error("上传失败");
+              }else{
+                  this.$message.error("你已上传过该歌曲");
               }
+              this.initUpload();
+              this.$refs.upload.clearFiles()
             })
             .catch(e => {
               console.log("error", e);
             });
+        }else{
+            this.loading = false;
         }
       });
     },
@@ -117,7 +122,7 @@ export default {
         author: "",
         file: {}
       };
-    }
+    },
   },
   computed: {
     ...mapGetters([

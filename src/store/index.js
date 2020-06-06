@@ -32,7 +32,18 @@ export default new Vuex.Store({
       state.singer=singers
       const baseUrl="http://120.24.35.66:8080/files/pictures/"
       for(let i=0;i<state.singer.list.length;i++){
-        state.singer.list[i].picturePath=baseUrl+state.singer.list[i].picturePath
+        if(!state.singer.list[i].picturePath){
+          let randomIndex = Math.floor(Math.random()*(5-1+1))+1
+          switch(randomIndex){
+            case 1:state.singer.list[i].picturePath="https://s1.ax1x.com/2020/06/06/t6sbBn.jpg"; break;
+            case 2:state.singer.list[i].picturePath="https://s1.ax1x.com/2020/06/06/t66dzD.jpg"; break;
+            case 3:state.singer.list[i].picturePath="https://s1.ax1x.com/2020/06/06/t66seA.jpg"; break;
+            case 4:state.singer.list[i].picturePath="https://s1.ax1x.com/2020/06/06/t6ciY6.jpg"; break;
+            case 5:state.singer.list[i].picturePath="https://s1.ax1x.com/2020/06/06/t6cElD.jpg"; break;
+          }
+        }else{
+          state.singer.list[i].picturePath=baseUrl+state.singer.list[i].picturePath
+        }
       }
     },
     setSearchInput(state,inputData){
