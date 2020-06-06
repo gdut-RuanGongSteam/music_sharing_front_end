@@ -14,13 +14,15 @@ export default new Vuex.Store({
     currentPlayIndex:{
       name:"",
       isPlay:false
-    }
+    },
+    downloadList:[],
+    user:{}
   },
   mutations: {
     setCurrentMusicData(state,musicData){
       state.currentMusic = musicData
     },
-    setownloadRankData(state,musicData){
+    setdownloadRankData(state,musicData){
       state.downloadRank = musicData
     },
     setSearchList(state,searchData){
@@ -42,6 +44,19 @@ export default new Vuex.Store({
     setCurrentPlayIndex(state,content){
       state.currentPlayIndex.name=content.name
       state.currentPlayIndex.isPlay=content.isPlay
+    },
+    setDownloadList(state,{operate,download}){
+      if(operate=="push"){
+        state.downloadList.push(download)
+      }else if(operate=="shift"){
+        state.downloadList.shift()
+      }
+    },
+    setChangeProgress (state,{downIndex,event}) {
+      Vue.set(state.downloadList[downIndex], "progress", Math.round(event.loaded / event.total * 100))
+    },
+    setUserData(state,loginUser){
+      state.user=loginUser
     }
   },
   getters:{
@@ -50,11 +65,12 @@ export default new Vuex.Store({
     searchResult:(state)=>{return state.seachList},
     getsearchInput:(state)=>{return state.searchInput},
     singerList:(state)=>{return state.singer},
-    getPlayList(state){return state.playList},
-    getCurrentPlayIndex(state){return state.currentPlayIndex}
+    getPlayList:(state)=>{return state.playList},
+    getCurrentPlayIndex:(state)=>{return state.currentPlayIndex},
+    getDownloadlist:(state)=>{return state.downloadList},
+    getUser:(state)=>{return state.user}
   },
-  actions: {
-  },
+  actions: {},
   modules: {
   }
 })

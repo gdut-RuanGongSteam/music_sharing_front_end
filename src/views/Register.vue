@@ -26,7 +26,7 @@
 }
 .login_box{
     width:35%;
-    height:70%;
+    height:75%;
     background-color:#fff;
     border-radius:10px;
     position:absolute;

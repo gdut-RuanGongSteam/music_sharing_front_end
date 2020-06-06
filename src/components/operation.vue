@@ -1,13 +1,14 @@
 <template>
     <div class="operation">
       <el-button  size="mini" class="el-icon-caret-right" circle @click="playing()"></el-button>
-      <el-button  size="mini" class="el-icon-download" circle></el-button>
+      <el-button  size="mini" class="el-icon-download" @click="downloading()" circle></el-button>
       <el-button  size="mini" class="el-icon-plus" @click="addSong()" circle></el-button>
       <el-button  size="mini" class="el-icon-chat-dot-round" @click="turnToComment()" circle></el-button>
     </div>
 </template>
 <script>
 import {mapMutations,mapGetters} from 'vuex'
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -76,17 +77,59 @@ export default {
       }
       this.setPlaying(music)
     },
+    downloading(){
+      const contain={
+        song:this.content[this.rowIndex].name,
+        singer:this.content[this.rowIndex].author,
+        userName:this.content[this.rowIndex].sharerName,
+        progress:0
+      }
+      let index=this.getDownloadlist.length
+      let downUrl="http://120.24.35.66:8080/music_system/song/downloaderOneSong/"+this.content[this.rowIndex].path
+      let fileName=this.content[this.rowIndex].name+"-"+this.content[this.rowIndex].author
+      this.setDownload({operate:"push",download:contain})
+      this.download(downUrl,index,fileName)
+      console.log("下载:",this.getDownloadlist)
+    },
+    download (downUrl,index,fileName) {
+				let that = this;
+				axios.get(downUrl, {
+					responseType: 'blob',
+					headers: {
+						'Content-Type': 'audio/mpeg;charset=utf-8',
+					},
+					onDownloadProgress (progressEvent) {
+						that.changeprogress({downIndex:index,event:progressEvent})
+					}
+				}).then((res)=>{
+					console.log(res);
+					if (!res) {
+						return
+					}
+					let url = window.URL.createObjectURL(new Blob([res.data], {type: "audio/mpeg"}));
+					let link = document.createElement('a');
+					link.style.display = 'none';
+					link.href = url;
+					link.setAttribute('download', fileName);
+					document.body.appendChild(link);
+					link.click();
+					document.body.removeChild(link);
+				})
+			},
     turnToComment() {
-      this.$router.push({name: 'comment-page'});
+      this.$router.push('comment-page');
     },
     ...mapMutations({
       setPlaying:"setPlayList",
-      setCurrentPlay:"setCurrentPlayIndex"
+      setCurrentPlay:"setCurrentPlayIndex",
+      setDownload:"setDownloadList",
+      changeprogress:"setChangeProgress"
     })
   },
   computed:{
     ...mapGetters([
       "getPlayList",
+      "getDownloadlist"
     ]),
   }
 }

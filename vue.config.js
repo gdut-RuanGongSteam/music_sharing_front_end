@@ -23,7 +23,7 @@ module.exports = {
     devServer: {
         proxy: { //设置代理解决跨域问题
             '/api': {
-                target: 'http://120.24.35.66:8080',
+                target: 'http://120.24.35.66:8080/music_system',
                 ws: true,
                 changeOrigin: true,
                 '/api': '/api'

@@ -11,9 +11,12 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-::-webkit-scrollbar{
-	display: none;
+  //除去浏览器滚动条
+  scrollbar-width:none;//火狐的暂时没法去掉
+  -ms-overflow-style: none;//兼容IE10+
+  ::-webkit-scrollbar{//兼容chrome和safari
+	  display: none;
+  }
 }
 #nav {
   padding: 30px;
