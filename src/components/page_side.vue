@@ -68,7 +68,7 @@ import{getters, mapGetters} from 'vuex'
         ]),
         imgUrl(){
             if(this.getUser.head_picture){
-                return this.getUser.head_picture
+                return "http://120.24.35.66:8080/files/pictures/"+this.getUser.head_picture
             }else{
                 return "https://s1.ax1x.com/2020/05/06/YVUz7V.jpg"
             }
