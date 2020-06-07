@@ -41,7 +41,7 @@
 
 <script>
 import { mapState } from "vuex";
-import upload from "../api/upload";
+import { upload } from "../api/upload";
 
 export default {
   name: "my-sharing",
