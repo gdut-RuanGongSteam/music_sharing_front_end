@@ -230,9 +230,10 @@ export default {
 .verify{
     margin-left: 10px;
     cursor: pointer;
+    color: whitesmoke;
 }
 .verify:hover{
-    color: blue;
+    color: rgb(255, 145, 0);
     text-decoration: underline;
 }
 </style>

@@ -117,7 +117,7 @@ export default {
 				})
 			},
     turnToComment() {
-      this.$router.push('comment-page');
+      this.$router.push('/about/comment-page');
     },
     ...mapMutations({
       setPlaying:"setPlayList",

@@ -21,7 +21,7 @@
     background-size:cover;
     width: 100%;
     height: 100%;
-    opacity: 0.9;/*设置透明度*/
+    opacity: 1;/*设置透明度*/
     position: fixed;
 }
 .login_box{

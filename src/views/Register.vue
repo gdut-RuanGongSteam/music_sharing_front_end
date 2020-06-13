@@ -33,7 +33,7 @@
     left:50%;
     top:50%;
     transform:translate(-50%,-50%);
-    background:rgba(255,255,255,0.3);
+    background:rgba(0,0,0,0.4);
 }
 
 </style>
