@@ -180,7 +180,7 @@ export default {
           content.append('newPassword', this.password.newpwd);
           this.edit();
           request("user/updatePassword", content, "post").then(res => {
-            if (res) {
+            if (res.flag) {
               this.successMessage('修改成功');
             } else {
               this.errorMessage('修改失败');

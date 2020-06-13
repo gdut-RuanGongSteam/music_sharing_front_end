@@ -42,7 +42,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import upload from "../api/upload";
+import { upload } from "../api/upload";
 
 export default {
   name: "my-sharing",
@@ -96,23 +96,23 @@ export default {
           console.log('this.uploadData["file"]: ', this.uploadData["file"]);
           upload(content)
             .then(res => {
-                console.log("上传：",res)
+              console.log("上传：", res);
               this.loading = false;
               if (res.data.includes("上传成功")) {
                 this.$message.success("上传成功");
               } else if (res.data.includes("上传失败")) {
                 this.$message.error("上传失败");
-              }else{
-                  this.$message.error("你已上传过该歌曲");
+              } else {
+                this.$message.error("你已上传过该歌曲");
               }
               this.initUpload();
-              this.$refs.upload.clearFiles()
+              this.$refs.upload.clearFiles();
             })
             .catch(e => {
               console.log("error", e);
             });
-        }else{
-            this.loading = false;
+        } else {
+          this.loading = false;
         }
       });
     },
@@ -122,12 +122,10 @@ export default {
         author: "",
         file: {}
       };
-    },
+    }
   },
   computed: {
-    ...mapGetters([
-        "getUser"
-    ])
+    ...mapGetters(["getUser"])
   }
 };
 </script>

@@ -82,7 +82,7 @@ const routes = [
       {
         path: "/personalCenter",
         name: "personalCenter",
-        component: personalCenter,
+        component: () => import("../views/personalCenter"),
       },
     ],
   },
