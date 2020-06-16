@@ -16,7 +16,14 @@ export default new Vuex.Store({
       isPlay:false
     },
     downloadList:[],//下载列表
-    user:{}//用户基本信息
+    user:{},//用户基本信息
+    otherUser:{},
+    currentComment:{},
+    bestComment:{},
+    mySharing:{},
+    myCollection:{},
+    myMessage:{},
+    commentSongId:1
   },
   mutations: {
     setCurrentMusicData(state,musicData){
@@ -68,6 +75,27 @@ export default new Vuex.Store({
     },
     setUserData(state,loginUser){
       state.user=loginUser
+    },
+    setOtherUserData(state,collection){
+      state.otherUser=collection
+    },
+    setBestCommentList(state,commentList){
+      state.bestComment=commentList
+    },
+    setCurrentCommentList(state,commentList){
+      state.currentComment=commentList
+    },
+    setMySharingList(state,shareList){
+      state.mySharing=shareList
+    },
+    setMyCollectionList(state,collectionList){
+      state.myCollection=collectionList
+    },
+    setMyMessageData(state,message){
+      state.myMessage=message
+    },
+    setCommentSongId(state,SongId){
+      state.commentSongId=SongId
     }
   },
   getters:{
@@ -79,7 +107,14 @@ export default new Vuex.Store({
     getPlayList:(state)=>{return state.playList},
     getCurrentPlayIndex:(state)=>{return state.currentPlayIndex},
     getDownloadlist:(state)=>{return state.downloadList},
-    getUser:(state)=>{return state.user}
+    getUser:(state)=>{return state.user},
+    getOtherUser:(state)=>{return state.otherUser},
+    getCurrentComment:(state)=>{return state.currentComment},
+    getBestComment:(state)=>{return state.bestComment},
+    getMySharing:(state)=>{return state.mySharing},
+    getMyCollection:(state)=>{return state.myCollection},
+    getMyMessage:(state)=>{return state.myMessage},
+    getSongId:(state)=>{return state.commentSongId}
   },
   actions: {},
   modules: {

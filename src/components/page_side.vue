@@ -47,7 +47,7 @@ import{getters, mapGetters} from 'vuex'
   export default {
     data() {
         return {
-            
+            user:{}
         }
     },
     mounted(){
@@ -67,14 +67,23 @@ import{getters, mapGetters} from 'vuex'
             "getUser"
         ]),
         imgUrl(){
-            if(this.getUser.head_picture){
-                return "http://120.24.35.66:8080/files/pictures/"+this.getUser.head_picture
+            if(this.user.head_picture){
+                return "http://120.24.35.66:8080/files/pictures/"+this.user.head_picture
             }else{
                 return "https://s1.ax1x.com/2020/05/06/YVUz7V.jpg"
             }
         },
         userName(){
-            return this.getUser.name
+            return this.user.name
+        }
+    },
+    watch:{
+        getUser:{
+            handler(val){
+                console.log("user",val)
+                this.user=val
+            },
+            deep:true
         }
     }
   };

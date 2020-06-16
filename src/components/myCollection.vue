@@ -1,13 +1,21 @@
 <template>
 	<el-card class="collection-card">
 		<div slot="header" class="clearfix">
-			<span class="title">我的分享</span>
+			<span class="title">我的收藏</span>
 		</div>
 		<el-table
 				ref="multipleTable"
 				:data="tableData"
 				tooltip-effect="dark"
 				style="width: 100%">
+            <el-table-column
+                prop=""
+                label=""
+                width="50">
+                <template slot-scope="scope1">
+                    <collection-button :rowIndex=scope1.$index :find="false" :collectionContent=currentList></collection-button>
+                </template>
+            </el-table-column>
 			<el-table-column
 					prop="name"
 					label="歌曲">
@@ -17,9 +25,10 @@
 					label="歌手">
 			</el-table-column>
 			<el-table-column
-					prop="downloaderNumber"
-					label="下载次数">
-			</el-table-column>
+                prop="sharerName"
+                label="分享者"
+                width="190">
+            </el-table-column>
 			<el-table-column
 					label="操作">
 				<template slot-scope="scope">
@@ -41,6 +50,7 @@
 
 <script>
 import operatePane from'@/components/operation'
+import collectionButton from "@/components/collectionBtn"
 import {mapMutations,mapGetters} from 'vuex'
 import { request } from '../api/http'
 
@@ -59,11 +69,11 @@ import { request } from '../api/http'
             	const content={
                 	pageNum:1,
                 	pageSize:15,
-                	sharerName:this.user.name
+                	userId:this.user.id
             	}
-            	request("song/getShareSongBySharerName",content,"get").then((e)=>{
+            	request("song/getCollectSongByUserId",content,"get").then((e)=>{
                 	console.log(e)
-                	this.setMySharing(e)
+                	this.setMyCollection(e)
                 	this.tableData=this.currentList
            	 	})
         	},
@@ -71,38 +81,39 @@ import { request } from '../api/http'
             	const content={
                 	pageNum:`${val}`,
                 	pageSize:15,
-                	sharerName:this.user.name
+                	userId:this.user.id
             	}
-            	request("song/getShareSongBySharerName",content,"get").then((e)=>{
+            	request("song/getCollectSongByUserId",content,"get").then((e)=>{
                 	console.log(e)
-                	this.setMySharing(e)
+                	this.setMyCollection(e)
                 	this.tableData=this.currentList
             	})
            	 	console.log(`当前页: ${val}`);
 			},
 			...mapMutations({
-				setMySharing:"setMySharingList",
+				setMyCollection:"setMyCollectionList",
 			})
 		},
 		computed: {
 			...mapGetters([
 				"getUser",
-				"getMySharing"
+				"getMyCollection"
 			]),
 			currentList(){
-           	 return this.getMySharing.list
+           	 return this.getMyCollection.list
         	},
 			pages(){
-				return this.getMySharing.pages*10
+				return this.getMyCollection.pages*10
 			},
 			user(){
 				return JSON.parse(window.sessionStorage.getItem("user"))
 			}
 		},
 		components:{
-        	operatePane,
-		},
-		watch:{
+            operatePane,
+            collectionButton
+        },
+        watch:{
             currentList:{
                 handler(val){
                     this.tableData=this.currentList

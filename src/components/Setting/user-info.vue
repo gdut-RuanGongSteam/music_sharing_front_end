@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters,mapMutations } from "vuex";
 import { request } from "../../api/http";
 import { uploadImage } from "../../api/upload";
 
@@ -95,6 +95,12 @@ export default {
           content.append('phone', 0);
           request("user/updateMessage", content, "POST").then(res => {
             if (res) {
+              request("user/getLoginUser","","get").then((e)=>{
+                // this.setUser(e)
+                window.sessionStorage.setItem("user",JSON.stringify(e));
+                this.setUser(JSON.parse(window.sessionStorage.getItem("user")))
+                // console.log("userInfo:",sessionStorage.getItem("user"))
+              })
               this.$message.success("设置成功!")
             }
           });
@@ -106,7 +112,10 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
-    }
+    },
+    ...mapMutations({
+      setUser:"setUserData"
+    })
   },
   computed: {
     ...mapGetters(["getUser"]),

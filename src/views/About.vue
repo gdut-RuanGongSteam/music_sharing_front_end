@@ -29,10 +29,7 @@ export default {
   } 
  },
   mounted(){
-    request("user/getLoginUser","","get").then((e)=>{
-      console.log("about:",e)
-      this.setUser(e)
-    })
+     this.setUser(JSON.parse(window.sessionStorage.getItem("user")))
   },
   methods:{
     changePage(){

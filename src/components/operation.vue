@@ -1,15 +1,20 @@
 <template>
     <div class="operation">
-      <el-button  size="mini" class="el-icon-caret-right" circle @click="playing()"></el-button>
-      <el-button  size="mini" class="el-icon-download" @click="downloading()" circle></el-button>
-      <el-button  size="mini" class="el-icon-plus" @click="addSong()" circle></el-button>
-      <el-button  size="mini" class="el-icon-chat-dot-round" @click="turnToComment()" circle></el-button>
+      <el-button  size="mini" title="播放" class="el-icon-caret-right" circle @click="playing()"></el-button>
+      <el-button  size="mini"  title="下载" class="el-icon-download" @click="downloading()" circle></el-button>
+      <el-button  size="mini" title="添加到播放列表" class="el-icon-plus" @click="addSong()" circle></el-button>
+      <el-button  size="mini" title="歌曲评论" class="el-icon-chat-dot-round" @click="turnToComment()" circle></el-button>
     </div>
 </template>
 <script>
 import {mapMutations,mapGetters} from 'vuex'
 import axios from 'axios'
+import { request } from '../api/http'
+import bestComment from "../mixin/bestComment"
+import currentComment from "../mixin/curentComment"
+
 export default {
+  mixins:[bestComment,currentComment],
   data() {
     return {
       playUrl:'',
@@ -76,6 +81,7 @@ export default {
         lrc: this.content[this.rowIndex].lyric,
       }
       this.setPlaying(music)
+      this.$message.success("添加成功!")
     },
     downloading(){
       const contain={
@@ -88,6 +94,7 @@ export default {
       let downUrl="http://120.24.35.66:8080/music_system/song/downloaderOneSong/"+this.content[this.rowIndex].path
       let fileName=this.content[this.rowIndex].name+"-"+this.content[this.rowIndex].author
       this.setDownload({operate:"push",download:contain})
+      this.$message.success("开始下载!")
       this.download(downUrl,index,fileName)
       console.log("下载:",this.getDownloadlist)
     },
@@ -117,13 +124,17 @@ export default {
 				})
 			},
     turnToComment() {
+      this.setSongId(this.content[this.rowIndex].id)
+      this.currentComment(1,this.content[this.rowIndex].id)
+      this.bestComment(1,this.content[this.rowIndex].id)
       this.$router.push('/about/comment-page');
     },
     ...mapMutations({
       setPlaying:"setPlayList",
       setCurrentPlay:"setCurrentPlayIndex",
       setDownload:"setDownloadList",
-      changeprogress:"setChangeProgress"
+      changeprogress:"setChangeProgress",
+      setSongId:"setCommentSongId"
     })
   },
   computed:{

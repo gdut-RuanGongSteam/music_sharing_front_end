@@ -1,15 +1,7 @@
 <template>
     <div>
-        <!-- <el-container>
-            <el-main>
-                <mySharing></mySharing>
-                <myMessage></myMessage>
-            </el-main>
-            <el-aside>
-                <page-side/>
-            </el-aside>
-        </el-container> -->
         <mySharing></mySharing>
+        <myCollection></myCollection>
         <myMessage></myMessage>
     </div>
 </template>
@@ -18,12 +10,14 @@
 import pageSide from'../components/page_side'
 import mySharing from '../components/mySharing'
 import myMessage from '../components/myMessage'
+import myCollection from '../components/myCollection'
 
 export default {
     components:{
         pageSide,
         mySharing,
-        myMessage
+        myMessage,
+        myCollection
     }
 }
 </script>

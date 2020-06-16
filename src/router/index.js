@@ -84,6 +84,11 @@ const routes = [
         name: "personalCenter",
         component: () => import("../views/personalCenter"),
       },
+      {
+        path: "/otherUserCenter",
+        name: "otherUserCenter",
+        component: () => import("../views/otherUserCenter"),
+      },
     ],
   },
 ];

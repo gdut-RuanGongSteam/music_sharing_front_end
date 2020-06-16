@@ -95,7 +95,12 @@ export default {
           if(!e.enabled){
             return this.$message.error("账号尚未激活，请前往邮箱激活你的账号!");
           }
-          this.setUser(e)
+          
+          // 存储到浏览器缓存
+          window.sessionStorage.setItem("user",JSON.stringify(e));
+          console.log("login??",JSON.parse(window.sessionStorage.getItem("user")))
+          this.setUser(JSON.parse(window.sessionStorage.getItem("user")))
+          // this.setUser(e)
           this.$router.push("/about/find");
           this.$message({
             message:"登陆成功！欢迎您，"+e.name,

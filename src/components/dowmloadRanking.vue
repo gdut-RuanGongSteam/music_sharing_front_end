@@ -10,16 +10,20 @@
                 prop="name"
                 label="序号"
                 type="index"
-                width="70">
+                width="50">
             </el-table-column>
-            <!-- <el-table-column
-                type="selection"
-                width="70">
-            </el-table-column> -->
+            <el-table-column
+                prop=""
+                label=""
+                width="50">
+                <template slot-scope="scope1">
+                    <collection-button :rowIndex=scope1.$index :find="true" :collectionContent=downloadRankList></collection-button>
+                </template>
+            </el-table-column>
             <el-table-column
                 prop="name"
                 label="歌曲"
-                width="340">
+                width="310">
             </el-table-column>
             <el-table-column
                 prop="author"
@@ -27,7 +31,7 @@
                 width="190">
             </el-table-column>
             <el-table-column
-                prop="address"
+                prop="sharerName"
                 label="分享者"
                 width="190">
             </el-table-column>
@@ -51,6 +55,7 @@
 </template>
 <script>
 import operatePane from'@/components/operation'
+import collectionButton from "@/components/collectionBtn"
 import {mapMutations,mapGetters} from 'vuex'
 import { request } from '../api/http'
 export default {
@@ -107,7 +112,8 @@ export default {
         ])
     },
     components:{
-        operatePane
+        operatePane,
+        collectionButton
     }
 }
 </script>
